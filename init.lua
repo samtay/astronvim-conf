@@ -18,7 +18,33 @@ return {
   },
 
   -- Set colorscheme to use
-  colorscheme = "astrodark",
+  colorscheme = "gruvbox",
+  plugins = {
+    {
+      "morhetz/gruvbox",
+      init = function() -- init function runs before the plugin is loaded
+        vim.g.gruvbox_italic = 1
+      end,
+    },
+    {
+      "nvim-neo-tree/neo-tree.nvim",
+      -- the first parameter is the plugin specification
+      -- the second is the table of options as set up in Lazy with the `opts` key
+      config = function(plugin, opts)
+        -- run the core AstroNvim configuration function with the options table
+        require "plugins.configs.neo-tree"(plugin, opts)
+        -- require and load extensions as necessary
+        local neotree = require "neo-tree"
+        neotree.follow_current_file = true
+      end,
+    },
+  },
+
+  default_theme = {
+    highlights = {
+      Comment = { italic = true },
+    },
+  },
 
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {

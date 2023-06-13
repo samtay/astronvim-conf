@@ -9,4 +9,23 @@ return {
   --     require("lsp_signature").setup()
   --   end,
   -- },
+  {
+    "morhetz/gruvbox",
+    lazy = false,
+    priority = 1000,
+    config = function() vim.g.gruvbox_italic = 1 end,
+  },
+  {
+    "ledger/vim-ledger",
+    ft = { "ledger", "journal" },
+    config = function()
+      vim.api.nvim_create_augroup("ledger", { clear = false })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = "ledger",
+        callback = function() vim.cmd "LedgerAlignBuffer" end,
+        desc = "Align on decimal point",
+      })
+    end,
+  },
+  "NoahTheDuke/vim-just",
 }
