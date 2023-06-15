@@ -10,12 +10,6 @@ return {
   --   end,
   -- },
   {
-    "morhetz/gruvbox",
-    lazy = false,
-    priority = 1000,
-    config = function() vim.g.gruvbox_italic = 1 end,
-  },
-  {
     "ledger/vim-ledger",
     ft = { "ledger", "journal" },
     config = function()

@@ -21,12 +21,6 @@ return {
   colorscheme = "gruvbox",
   plugins = {
     {
-      "morhetz/gruvbox",
-      init = function() -- init function runs before the plugin is loaded
-        vim.g.gruvbox_italic = 1
-      end,
-    },
-    {
       "nvim-neo-tree/neo-tree.nvim",
       -- the first parameter is the plugin specification
       -- the second is the table of options as set up in Lazy with the `opts` key
