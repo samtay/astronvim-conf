@@ -5,6 +5,7 @@ return {
   { import = "astrocommunity.colorscheme.gruvbox-nvim" },
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.rust" },
+  { import = "astrocommunity.pack.haskell" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.dart" },

@@ -104,9 +104,9 @@ return {
       "<cmd>sp ~/.config/kitty/kitty.conf<cr>",
       desc = "Open kitty config",
     },
-    ["<leader>.w"] = {
-      "<cmd>sp ~/.config/awesome/rc.lua<cr>",
-      desc = "Open awesomewm config",
+    ["<leader>.x"] = {
+      "<cmd>sp ~/.config/xmonad/xmonad.hs<cr>",
+      desc = "Open xmonad config",
     },
     ---------------------- rust  ----------------------
     ["<leader>r"] = { false, desc = " Rust" },
@@ -143,6 +143,18 @@ return {
     ["<leader>uT"] = {
       function() require("telescope.builtin").colorscheme { enable_preview = true } end,
       desc = "Pick themes",
+    },
+    ["<leader><leader>"] = {
+      function() require("notify").dismiss { silent = true } end,
+      desc = "Dismiss notifications",
+    },
+    ["<leader>un"] = {
+      require("astronvim.utils.ui").toggle_ui_notifications,
+      desc = "Toggle notifications",
+    },
+    ["<leader>uN"] = {
+      require("astronvim.utils.ui").change_number,
+      desc = "Change line numbering",
     },
     ---------------------- windows ----------------------
     ["<leader>w"] = { false, desc = "󰖮 Windows" },
@@ -189,6 +201,9 @@ return {
     ["<leader>pr"] = { "<cmd>AstroReload<cr>", desc = "Reload AstroNvim" },
     -- setting a mapping to false will disable it
     ["<leader>o"] = false,
+    ["gy"] = { '"+y', desc = "Copy to system clipboard" },
+    ["gp"] = { '"+p', desc = "Paste from system clipboard" },
+    ["gP"] = { '"+P', desc = "Paste from system clipboard" },
   },
   t = {
     -- setting a mapping to false will disable it
@@ -203,8 +218,11 @@ return {
       "\"zy<cmd>exec 'Telescope grep_string default_text=' . escape(@z, ' ')<cr>",
       desc = "Live grep selection",
     },
+    ["gy"] = { '"+y', desc = "Copy to system clipboard" },
+    ["gp"] = { '"+p', desc = "Paste from system clipboard" },
+    ["gP"] = { '"+P', desc = "Paste from system clipboard" },
   },
-  c = {
-    ["w!!"] = { "w !sudo tee > /dev/null %" },
-  },
+  -- c = {
+  --   ["w!!"] = { "w !sudo tee > /dev/null %" },
+  -- },
 }
