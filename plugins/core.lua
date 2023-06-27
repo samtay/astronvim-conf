@@ -40,6 +40,7 @@ return {
       return opts
     end,
   },
+  { "nvim-treesitter/nvim-treesitter", commit = "33eb472b459f1d2bf49e16154726743ab3ca1c6d" },
   -- You can disable default plugins as follows:
   -- { "max397574/better-escape.nvim", enabled = false },
   --

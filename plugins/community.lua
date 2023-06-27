@@ -8,7 +8,6 @@ return {
   { import = "astrocommunity.pack.haskell" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.typescript" },
-  { import = "astrocommunity.pack.dart" },
   { import = "astrocommunity.markdown-and-latex.vimtex" },
   {
     "gruvbox.nvim",
@@ -17,5 +16,17 @@ return {
         comments = true,
       },
     },
+  },
+  { import = "astrocommunity.pack.dart" },
+  {
+    "akinsho/flutter-tools.nvim",
+    opts = function()
+      local lsp = require("astronvim.utils.lsp").config "dartls"
+      lsp.settings.analysisExcludedFolders = { "/opt/flutter/bin/cache/pkg/" }
+      return {
+        lsp = lsp,
+        debugger = { enabled = true },
+      }
+    end,
   },
 }
