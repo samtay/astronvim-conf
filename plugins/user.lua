@@ -22,4 +22,5 @@ return {
     end,
   },
   "NoahTheDuke/vim-just",
+  -- "github/copilot.vim",
 }

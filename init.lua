@@ -1,16 +1,16 @@
 return {
   -- Configure AstroNvim updates
   updater = {
-    remote = "origin",     -- remote to use
-    channel = "stable",    -- "stable" or "nightly"
-    version = "latest",    -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
-    branch = "nightly",    -- branch name (NIGHTLY ONLY)
-    commit = nil,          -- commit hash (NIGHTLY ONLY)
-    pin_plugins = nil,     -- nil, true, false (nil will pin plugins on stable only)
-    skip_prompts = false,  -- skip prompts about breaking changes
+    remote = "origin", -- remote to use
+    channel = "stable", -- "stable" or "nightly"
+    version = "latest", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
+    branch = "nightly", -- branch name (NIGHTLY ONLY)
+    commit = nil, -- commit hash (NIGHTLY ONLY)
+    pin_plugins = nil, -- nil, true, false (nil will pin plugins on stable only)
+    skip_prompts = false, -- skip prompts about breaking changes
     show_changelog = true, -- show the changelog after performing an update
-    auto_quit = false,     -- automatically quit the current session after a successful update
-    remotes = {            -- easily add new remotes to track
+    auto_quit = false, -- automatically quit the current session after a successful update
+    remotes = { -- easily add new remotes to track
       --   ["remote_name"] = "https://remote_url.come/repo.git", -- full remote url
       --   ["remote2"] = "github_user/repo", -- GitHub user/repo shortcut,
       --   ["remote3"] = "github_user", -- GitHub user assume AstroNvim fork
@@ -26,7 +26,7 @@ return {
       -- the second is the table of options as set up in Lazy with the `opts` key
       config = function(plugin, opts)
         -- run the core AstroNvim configuration function with the options table
-        require "plugins.configs.neo-tree" (plugin, opts)
+        require "plugins.configs.neo-tree"(plugin, opts)
         -- require and load extensions as necessary
         local neotree = require "neo-tree"
         neotree.follow_current_file = true
@@ -51,7 +51,7 @@ return {
     formatting = {
       -- control auto formatting on save
       format_on_save = {
-        enabled = true,     -- enable or disable format on save globally
+        enabled = true, -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
         },
@@ -71,6 +71,41 @@ return {
     -- enable servers that you already have installed without mason
     servers = {
       -- "pyright"
+    },
+    config = {
+      clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      rust_analyzer = {
+        settings = {
+          ["rust-analyzer"] = {
+            completion = {
+              postfix = {
+                enable = false,
+              },
+            },
+            cargo = {
+              features = { "linkedproofs" },
+            },
+            checkOnSave = {
+              overrideCommand = {
+                "cargo",
+                "clippy",
+                "--workspace",
+                "--all-targets",
+                "--features",
+                "linkedproofs",
+                "--tests",
+                "--benches",
+                "--examples",
+                "--message-format=json",
+              },
+              allTargets = true,
+            },
+            rustfmt = {
+              extraArgs = { "+nightly" },
+            },
+          },
+        },
+      },
     },
   },
 
@@ -111,6 +146,14 @@ return {
     vim.api.nvim_create_autocmd("FileType", {
       pattern = { "markdown" },
       callback = function() vim.opt_local.textwidth = 80 end,
+    })
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = { "*" },
+      callback = function()
+        vim.opt.formatoptions:remove "c"
+        vim.opt.formatoptions:remove "r"
+        vim.opt.formatoptions:remove "o"
+      end,
     })
   end,
 }

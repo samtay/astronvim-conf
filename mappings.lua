@@ -173,6 +173,11 @@ return {
     ["<leader>wJ"] = { function() require("smart-splits").swap_buf_down() end, desc = "Move buf to below split" },
     ["<leader>wK"] = { function() require("smart-splits").swap_buf_up() end, desc = "Move buf to above split" },
     ["<leader>wL"] = { function() require("smart-splits").swap_buf_right() end, desc = "Move buf to right split" },
+
+    ["<leader>Wk"] = { function() require("smart-splits").resize_up() end, desc = "Resize split up" },
+    ["<leader>Wj"] = { function() require("smart-splits").resize_down() end, desc = "Resize split down" },
+    ["<leader>Wh"] = { function() require("smart-splits").resize_left() end, desc = "Resize split left" },
+    ["<leader>Wl"] = { function() require("smart-splits").resize_right() end, desc = "Resize split right" },
     ---------------------- buffers ----------------------
     ["<leader><tab>"] = { "<C-^>", desc = "Previous buffer" },
     ["<leader>bc"] = { "<cmd>bdelete<cr>", desc = "Close buffer (or use <spc>c)" },
@@ -204,6 +209,14 @@ return {
     ["gy"] = { '"+y', desc = "Copy to system clipboard" },
     ["gp"] = { '"+p', desc = "Paste from system clipboard" },
     ["gP"] = { '"+P', desc = "Paste from system clipboard" },
+    ["gw"] = {
+      function()
+        local save_cursor = vim.fn.getpos "."
+        vim.cmd [[%s/\s\+$//e]]
+        vim.fn.setpos(".", save_cursor)
+      end,
+      desc = "Delete trailing whitespace",
+    },
   },
   t = {
     -- setting a mapping to false will disable it

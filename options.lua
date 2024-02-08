@@ -11,8 +11,8 @@ return function(local_vim)
   local_vim.opt.splitright = true
   -- experiment with this... seems useful
   local_vim.opt.scrolloff = 4
-  -- dont auto comment
-  local_vim.opt.formatoptions = vim.opt.formatoptions - { "c", "r", "o" }
+  -- modifying this doesn't work here, modifications moved to polish func
+  local_vim.opt.formatoptions = vim.opt.formatoptions
   local_vim.opt.clipboard = ""
   -- TODO delete trailing whitespace func?
   -- instead, try treesitter indent
